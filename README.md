@@ -4,3 +4,4 @@
 
 - Flask
 - DBeaver
+- Pytest
