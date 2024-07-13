@@ -1,0 +1,495 @@
+{
+	"info": {
+		"_postman_id": "73f79051-2cc2-49a6-9e6d-58309333c9de",
+		"name": "nlw_trips_app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36881146"
+	},
+	"item": [
+		{
+			"name": "Trip routes",
+			"item": [
+				{
+					"name": "Create trip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"tripId\", jsonData.id);\r",
+									"pm.globals.set(\"tripId\", \"id\");\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"destination\": \"Sulani\",\r\n    \"start_date\": \"18-07-2024\",\r\n    \"end_date\": \"01-08-2024\",\r\n    \"owner_name\": \"Lilith Pleasant\",\r\n    \"owner_email\": \"rqc5xnhh2drd6rt7@ethereal.email\",\r\n    \"emails_to_invite\": [\r\n        \"malcolm@landgraab.com\",\r\n        \"cassandra@goth.com\",\r\n        \"nina@caliente.com\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local_host}}/trips",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get trip by id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm trip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId/confirm",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId",
+								"confirm"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Links routes",
+			"item": [
+				{
+					"name": "Create link for the trip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"linkId\", jsonData.linkId);\r",
+									"pm.globals.set(\"linkId\", \"linkId\");\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"https://sims.fandom.com/wiki/Sulani\",\r\n    \"title\": \"Sulani infos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId/links",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId",
+								"links"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get links by tripId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId/links",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId",
+								"links"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Participants routes",
+			"item": [
+				{
+					"name": "Create participant by tripId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"participantId\", jsonData.participant_id);\r",
+									"pm.globals.set(\"participantId\", \"participant_id\");\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Fay Bell\",\r\n    \"email\": \"fay@goog.com.br\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId/invites",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId",
+								"invites"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find participants by tripId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId/participants",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId",
+								"participants"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Participant confirms trip (change status)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"is_confirmed\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local_host}}/participants/:participantId/confirm",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"participants",
+								":participantId",
+								"confirm"
+							],
+							"variable": [
+								{
+									"key": "participantId",
+									"value": "{{participantId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Activity routes",
+			"item": [
+				{
+					"name": "Create activity for trip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"activityId\", jsonData.activityId);\r",
+									"pm.globals.set(\"activityId\", \"activityId\");\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"occurs_at\": \"06-06-2025\",\r\n    \"title\": \"Run to the hills\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId/activities",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId",
+								"activities"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get activities by tripId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_local_host}}/trips/:tripId/activities",
+							"host": [
+								"{{url_local_host}}"
+							],
+							"path": [
+								"trips",
+								":tripId",
+								"activities"
+							],
+							"variable": [
+								{
+									"key": "tripId",
+									"value": "{{tripId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "participantId",
+			"value": "str"
+		}
+	]
+}
