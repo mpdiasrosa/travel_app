@@ -6,6 +6,8 @@ This project was created during [Next Level Week](https://www.rocketseat.com.br/
 
 **Important to note:** I'm aware that the application has a lot of bugs. It was made just to get started and experiment with Flask; it's not a finished product, just created for fun. ;)
 
+My [participation certificate](https://app.rocketseat.com.br/certificates/85faacf2-5fd6-4c00-9353-e8a773db840d). ˙✧˖°
+
 ## Running the project
 
 To run the project, open the DBeaver database and execute the following command:
